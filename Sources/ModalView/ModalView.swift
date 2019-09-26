@@ -33,18 +33,18 @@ public struct ModalPresenter<Content> : View where Content : View {
     }
 }
 
-struct ModalLink<Label, Destination> : View where Label : View, Destination : View  {
+public struct ModalLink<Label, Destination> : View where Label : View, Destination : View  {
     @EnvironmentObject private var modalView: Pipe
     
     private var destination: AnyView
     private var label: Label
     
-    init(destination: Destination, @ViewBuilder label: () -> Label) {
+    public init(destination: Destination, @ViewBuilder label: () -> Label) {
         self.destination = AnyView(destination)
         self.label = label()
     }
     
-    var body: some View {
+    public var body: some View {
         Button(action: presentModalView){ label }
     }
     
