@@ -5,7 +5,7 @@ on: [push]
 jobs:
   test:
     name: Test
-    runs-on: macOS-10.15
+    runs-on: macOS-10.14
     steps:
     - name: Checkout
       uses: actions/checkout@master
