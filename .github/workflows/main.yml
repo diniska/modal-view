@@ -8,6 +8,7 @@ jobs:
     runs-on: macOS-10.15
     
     steps:
-    - uses: actions/checkout@v1
+    - name: Checkout
+      uses: actions/checkout@master
     - name: Run tests
       run: swift test
