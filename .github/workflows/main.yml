@@ -5,11 +5,9 @@ on: [push]
 jobs:
   test:
     name: Test
-    runs-on: macOS-10.14
+    runs-on: macOS-10.15
     steps:
     - name: Checkout
       uses: actions/checkout@v1
     - name: Run tests
-      run: |
-        sudo xcode-select --switch /Applications/Xcode_11.app
-        swift test
+      run: swift test
