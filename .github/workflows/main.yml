@@ -1,0 +1,13 @@
+name: ModalView Test
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: macOS-10.15
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Run tests
+      run: swift test
