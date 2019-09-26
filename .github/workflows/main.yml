@@ -11,4 +11,5 @@ jobs:
       uses: actions/checkout@v1
     - name: Run tests
       run: |
+        xcode-select --switch /Applications/Xcode_11.app
         swift test
