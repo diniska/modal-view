@@ -1,7 +1,7 @@
 import XCTest
 import SwiftUI
 
-@testable import ModalView
+import ModalView
 
 final class ModalViewTests: XCTestCase {
 
