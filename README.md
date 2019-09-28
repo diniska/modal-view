@@ -1,5 +1,7 @@
 # ModalView
 
+![Swift 5.1](https://img.shields.io/badge/Swift-5.1-FA5B2C)
+
 SwiftUI An analogue of `NavigationView` that provides a convenient interface of displaying modal views.
 
 ## How to use
