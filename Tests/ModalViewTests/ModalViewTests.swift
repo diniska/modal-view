@@ -61,7 +61,6 @@ final class ModalViewTests: XCTestCase {
                 }
             }
         }
-        snapshotTests.recording = true
         snapshotTests.check(size: CGSize(width: 60, height: 25)) {
             ModalPresenter {
                 ModalLink(destination: { ModalView(dismiss: $0) }) {
