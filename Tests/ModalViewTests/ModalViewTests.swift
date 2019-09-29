@@ -52,4 +52,22 @@ final class ModalViewTests: XCTestCase {
          }
     }
     
+    func testLinkWithDismisseClosure() {
+        struct ModalView: View {
+            var dismiss: () -> ()
+            var body: some View {
+                Button(action: dismiss) {
+                    Text("Close")
+                }
+            }
+        }
+        snapshotTests.recording = true
+        snapshotTests.check(size: CGSize(width: 60, height: 25)) {
+            ModalPresenter {
+                ModalLink(destination: { ModalView(dismiss: $0) }) {
+                    Text("Open")
+                }
+            }
+        }
+    }
 }

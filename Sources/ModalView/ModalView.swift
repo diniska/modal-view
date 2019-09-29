@@ -34,6 +34,7 @@ public struct ModalPresenter<Content> : View where Content : View {
 }
 
 public struct ModalLink<Label, Destination> : View where Label : View, Destination : View  {
+    public typealias DestinationBuilder = (_ dismiss: @escaping() -> ()) -> Destination
     @EnvironmentObject private var modalView: Pipe
     
     private var destination: AnyView
@@ -44,6 +45,13 @@ public struct ModalLink<Label, Destination> : View where Label : View, Destinati
         self.label = label()
     }
     
+    public init(@ViewBuilder destination: DestinationBuilder, @ViewBuilder label: () -> Label) {
+        var dismiss = {}
+        self.destination = AnyView(destination({ dismiss() }))
+        self.label = label()
+        dismiss = dismissModalView
+    }
+    
     public var body: some View {
         Button(action: presentModalView){ label }
     }
@@ -51,11 +59,15 @@ public struct ModalLink<Label, Destination> : View where Label : View, Destinati
     private func presentModalView() {
         modalView.content = Pipe.Content(view: destination)
     }
+    
+    private func dismissModalView() {
+        modalView.content = nil
+    }
 }
 
 #if DEBUG
 
-struct ModalLink_Preview: PreviewProvider {
+private struct ModalLink_Preview: PreviewProvider {
     
     static var previews: some View {
         ModalPresenter {
