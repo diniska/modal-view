@@ -34,4 +34,48 @@ struct ContentView: View {
 ![Presenting modal view with SwiftUI](./Docs/Resources/displaying-modal-view.gif)
 
 
+## Additional information
+To add a "close" button to a modal view we can use a `dismiss` closure provided by the `ModalLink`:
+
+```swift
+struct ContentView: View {
+    var body: some View {
+        ModalPresenter {
+            ModalLink(destination: { dismiss in
+                Button(action: dismiss) {
+                    Text("Dismiss")
+                }
+            }) {
+                Text("Main view")
+            }
+        }
+    }
+}
+```
+
+Moving the destination in the code above to a separate structure is a recommended way here to refactor the code here as modal views regularly contains a bit more that just a text or button.
+
+```swift
+struct ContentView: View {
+    var body: some View {
+        ModalPresenter {
+            ModalLink(destination: MyModalView.init(dismiss:)) {
+                Text("Main view")
+            }
+        }
+    }
+}
+
+struct MyModalView: View {
+    var dismiss: () -> ()
+    var body: some View {
+        Button(action: dismiss) {
+            Text("Dismiss")
+        }
+    }
+}
+```
+
+
 Learn more here: [Display Modal View with SwiftUI](https://medium.com/@diniska/modal-view-in-swiftui-3f9faf910249)
+
