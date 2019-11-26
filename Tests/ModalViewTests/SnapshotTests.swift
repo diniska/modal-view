@@ -30,7 +30,7 @@ struct SnapshotTests {
         let existing = self[named: fileName(functionName: name)]
         XCTAssertNotNil(existing)
         let representation = takeSnapshot(view: view, size: size)
-        XCTAssertEqual(representation, existing!)
+        XCTAssertEqual(representation as NSData, existing! as NSData)
     }
     
     private subscript(named resourceName: String) -> Data? {
