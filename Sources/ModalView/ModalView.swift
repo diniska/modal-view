@@ -6,8 +6,11 @@
 //  Copyright © 2019 Denis Chaschin. All rights reserved.
 //
 
+#if canImport(SwiftUI) && canImport(Combine)
+
 import SwiftUI
 
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 private final class Pipe : ObservableObject {
     struct Content: Identifiable {
         fileprivate typealias ID = String
@@ -18,6 +21,7 @@ private final class Pipe : ObservableObject {
 }
 
 // Container of a view that contains ModalLink in its hierarchy
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct ModalPresenter<Content> : View where Content : View {
     @ObservedObject private var modalView = Pipe()
     
@@ -35,6 +39,7 @@ public struct ModalPresenter<Content> : View where Content : View {
 }
 
 // An interactable element that presentas a modal view
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct ModalLink<Label, Destination> : View where Label : View, Destination : View  {
     public typealias DestinationBuilder = (_ dismiss: @escaping() -> ()) -> Destination
     @EnvironmentObject private var modalView: Pipe
@@ -81,6 +86,7 @@ public struct ModalLink<Label, Destination> : View where Label : View, Destinati
 
 #if DEBUG
 
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 private struct ModalLink_Preview: PreviewProvider {
     
     static var previews: some View {
@@ -96,5 +102,7 @@ private struct ModalLink_Preview: PreviewProvider {
         }
     }
 }
+
+#endif
 
 #endif
