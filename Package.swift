@@ -7,7 +7,7 @@ let package = Package(
     name: "ModalView",
     platforms: [
         .macOS(.v10_15),
-        .iOS(.v13),
+        .iOS(.v9),
         .watchOS(.v6),
         .tvOS(.v13)
     ],
