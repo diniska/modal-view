@@ -94,7 +94,7 @@ private struct ModalLink_Preview: PreviewProvider {
             List {
                 ModalLink(destination: Text("Destination 1")) {
                     Text("Open 1")
-                }.onTapGesture(perform: <#T##() -> Void#>)
+                }
                 ModalLink(destination: Text("Destination 2")) {
                     Text("Open 2")
                 }
