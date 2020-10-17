@@ -52,7 +52,7 @@ final class ModalViewTests: XCTestCase {
          }
     }
     
-    func testLinkWithDismisseClosure() {
+    func testLinkWithDismissClosure() {
         struct ModalView: View {
             var dismiss: () -> ()
             var body: some View {

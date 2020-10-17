@@ -1,8 +1,8 @@
 # ModalView
 
-![Swift 5.1](https://img.shields.io/badge/Swift-5.1-FA5B2C) ![Xcode 11](https://img.shields.io/badge/Xcode-11-44B3F6) ![iOS 13.0](https://img.shields.io/badge/iOS-13.0-178DF6) ![iPadOS 13.0](https://img.shields.io/badge/iPadOS-13.0-178DF6) ![MacOS 10.15](https://img.shields.io/badge/MacOS-10.15-178DF6)
+![Swift 5.1](https://img.shields.io/badge/Swift-5.1-FA5B2C) ![Xcode 11](https://img.shields.io/badge/Xcode-11-44B3F6) ![iOS 13.0](https://img.shields.io/badge/iOS-13.0-178DF6) ![iPadOS 13.0](https://img.shields.io/badge/iPadOS-13.0-178DF6) ![MacOS 10.15](https://img.shields.io/badge/MacOS-10.15-178DF6) ![Tests](https://github.com/diniska/modal-view/workflows/Tests%20runner/badge.svg)
 
-SwiftUI An analogue of `NavigationView` that provides a convenient interface of displaying modal views.
+An analogue of SwiftUI `NavigationView` that provides a convenient interface of displaying modal views.
 
 ## How to use
 ### Step 1
