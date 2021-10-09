@@ -2,9 +2,9 @@ name: Tests runner
 
 on:
   push:
-    branches: [ master ]
+    branches: [ void ]
   pull_request:
-    branches: [ master ]
+    branches: [ void ]
 
 jobs:
   build:
