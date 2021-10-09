@@ -6,7 +6,8 @@
 //  Copyright © 2019 Denis Chaschin. All rights reserved.
 //
 
-#if canImport(SwiftUI) && canImport(Combine)
+#if canImport(SwiftUI) && canImport(Combine) && (arch(arm64) || arch(x86_64))
+// arm64 and x86_64 used for compatibility with Xcode 13. More context here: https://stackoverflow.com/a/61954608
 
 import SwiftUI
 
