@@ -37,6 +37,17 @@ final class ModalViewTests: XCTestCase {
          }
     }
     
+    func testModalPresenterWithFullScreenCoverStyleLink() {
+        snapshotTests.check(size: CGSize(width: 50, height: 50)) {
+             ModalPresenter {
+                ModalLink(destination: EmptyView()) {
+                    Text("hello")
+                }
+                .modalViewPresentationStyle(.fullScreenCover)
+             }
+         }
+    }
+    
     func testLinkInsideList() {
         snapshotTests.check(size: CGSize(width: 85, height: 60)) {
              ModalPresenter {
