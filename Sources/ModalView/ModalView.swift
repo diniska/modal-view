@@ -82,7 +82,7 @@ private struct ModalPresenterIOS14: ViewModifier {
     }
 }
 
-/// An interactable element that presentas a modal view
+/// An interactable element that presents a modal view
 @available(iOS 13, macOS 10.15, tvOS 13, watchOS 6, *)
 public struct ModalLink<Label, Destination> : View where Label : View, Destination : View  {
     public typealias DestinationBuilder = (_ dismiss: @escaping() -> ()) -> Destination
