@@ -3,6 +3,7 @@ import SwiftUI
 
 import ModalView
 
+@MainActor
 final class ModalViewTests: XCTestCase {
 
     var snapshotTests = SnapshotTests(recording: false)
@@ -37,17 +38,13 @@ final class ModalViewTests: XCTestCase {
          }
     }
     
-    func testLinkInsideList() {
-        snapshotTests.check(size: CGSize(width: 85, height: 60)) {
+    func testModalPresenterWithFullScreenCoverStyleLink() {
+        snapshotTests.check(size: CGSize(width: 50, height: 50)) {
              ModalPresenter {
-                List {
-                    ModalLink(destination: EmptyView()) {
-                        Text("first")
-                    }
-                    ModalLink(destination: EmptyView()) {
-                        Text("second")
-                    }
+                ModalLink(destination: EmptyView()) {
+                    Text("hello")
                 }
+                .modalViewPresentationStyle(.fullScreenCover)
              }
          }
     }

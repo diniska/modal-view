@@ -34,6 +34,12 @@ struct ContentView: View {
 ![Presenting modal view with SwiftUI](./Docs/Resources/displaying-modal-view.gif)
 
 
+## Styling
+
+There are two styles available: `sheet` (default) and `fullScreenCover`. 
+To change a style use method `View.modalViewPresentationStyle`.
+
+
 ## Additional information
 To add a "close" button to a modal view we can use a `dismiss` closure provided by the `ModalLink`:
 
@@ -53,7 +59,7 @@ struct ContentView: View {
 }
 ```
 
-Moving the destination in the code above to a separate structure is a recommended way here to refactor the code here as modal views regularly contains a bit more that just a text or button.
+Moving the destination in the code above to a separate structure is a recommended way here to refactor the code as modal views regularly contain a bit more that just a text or button.
 
 ```swift
 struct ContentView: View {
