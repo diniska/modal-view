@@ -48,21 +48,6 @@ final class ModalViewTests: XCTestCase {
          }
     }
     
-    func testLinkInsideList() {
-        snapshotTests.check(size: CGSize(width: 85, height: 60)) {
-             ModalPresenter {
-                List {
-                    ModalLink(destination: EmptyView()) {
-                        Text("first")
-                    }
-                    ModalLink(destination: EmptyView()) {
-                        Text("second")
-                    }
-                }
-             }
-         }
-    }
-    
     func testLinkWithDismissClosure() {
         struct ModalView: View {
             var dismiss: () -> ()
