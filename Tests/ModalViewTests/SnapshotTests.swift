@@ -55,17 +55,9 @@ private var resourcesPath: String {
 
 @MainActor
 private func takeSnapshot<V: View>(@ViewBuilder view: () -> V, size: CGSize) -> Data {
-    if #available(iOS 16, macOS 13, tvOS 16, watchOS 9, *) {
-        return ImageRenderer(
-            content: view()
-                .frame(width: size.width, height: size.height)
-                .background(Color.clear)
-        ).nsImage!.tiffRepresentation!
-    } else {
-        let view = NSHostingView(rootView: view())
-        view.frame.size = size
-        return NSImage(data: view.dataWithPDF(inside: view.bounds))!.tiffRepresentation!
-    }
+    let view = NSHostingView(rootView: view())
+    view.frame.size = size
+    return NSImage(data: view.dataWithPDF(inside: view.bounds))!.tiffRepresentation!
 }
 
 private func fileName(functionName: String) -> String {
