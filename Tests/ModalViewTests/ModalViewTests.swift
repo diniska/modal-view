@@ -3,6 +3,7 @@ import SwiftUI
 
 import ModalView
 
+@MainActor
 final class ModalViewTests: XCTestCase {
 
     var snapshotTests = SnapshotTests(recording: false)

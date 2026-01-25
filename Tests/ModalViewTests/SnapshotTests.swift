@@ -10,6 +10,7 @@ import Foundation
 import SwiftUI
 import XCTest
 
+@MainActor
 struct SnapshotTests {
     var recording = false
     
@@ -52,10 +53,15 @@ private var resourcesPath: String {
     NSString.path(withComponents: URL(fileURLWithPath: #file).pathComponents.dropLast().dropLast() + ["Resources"])
 }
 
+@MainActor
 private func takeSnapshot<V: View>(@ViewBuilder view: () -> V, size: CGSize) -> Data {
-    let view = NSHostingView(rootView: view())
-    view.frame.size = size
-    return NSImage(data: view.dataWithPDF(inside: view.bounds))!.tiffRepresentation!
+    if #available(iOS 16, macOS 13, tvOS 16, watchOS 9, *) {
+        return ImageRenderer(content: view().background(Color.clear)).nsImage!.tiffRepresentation!
+    } else {
+        let view = NSHostingView(rootView: view())
+        view.frame.size = size
+        return NSImage(data: view.dataWithPDF(inside: view.bounds))!.tiffRepresentation!
+    }
 }
 
 private func fileName(functionName: String) -> String {
