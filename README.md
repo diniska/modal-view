@@ -41,7 +41,7 @@ To change a style use method `View.modalViewPresentationStyle`.
 
 ## Action
 
-A `onModalViewPresent` closure can be additionally provided to the `ModalLink` if some actions need to be done right before a modal view presents.
+An `onModalViewPresent` closure can be additionally provided to the `ModalLink` if some actions need to be done right before a modal view presents.
 This can be useful for example for analytics or logging.
 
 ```swift
