@@ -39,6 +39,18 @@ struct ContentView: View {
 There are two styles available: `sheet` (default) and `fullScreenCover`. 
 To change a style use method `View.modalViewPresentationStyle`.
 
+## Action
+
+A `onModalViewPresent` closure can be additionally provided to the `ModalLink` if some actions need to be done right before a modal view presents.
+This can be useful for example for analytics or logging.
+
+```swift
+ModalLink(destination: Text("Modal View")) {
+    print("Presenting modal view")
+} label: {
+    Text("Main view")
+}
+```
 
 ## Additional information
 To add a "close" button to a modal view we can use a `dismiss` closure provided by the `ModalLink`:
@@ -81,7 +93,6 @@ struct MyModalView: View {
     }
 }
 ```
-
 
 Learn more here: [Display Modal View with SwiftUI](https://medium.com/@diniska/modal-view-in-swiftui-3f9faf910249)
 
