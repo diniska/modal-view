@@ -172,9 +172,12 @@ private struct ModalLink_Preview: PreviewProvider {
                 }
                 .modalViewPresentationStyle(.fullScreenCover)
                 
-                ModalLink(destination: Text("Destination 4")) {
-                    print("Modal 4 presented")
-                } label: {
+                ModalLink(
+                    destination: Text("Destination 4"),
+                    onModalViewPresent: {
+                        print("Modal 4 presented")
+                    }
+                ) {
                     Text("Open 4")
                 }
             }
