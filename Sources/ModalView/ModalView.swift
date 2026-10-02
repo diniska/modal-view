@@ -151,30 +151,32 @@ public struct ModalLink<Label, Destination> : View where Label : View, Destinati
 #if DEBUG
 
 @available(iOS 13, macOS 10.15, tvOS 13, watchOS 6, *)
-#Preview {
-    ModalPresenter {
-        List {
-            ModalLink(destination: Text("Destination 1")) {
-                Text("Open 1")
-            }
-            ModalLink(destination: Text("Destination 2")) {
-                Text("Open 2")
-            }
-            
-            ModalLink(destination: { dismiss in
-                VStack {
-                    Text("Full screen cover")
-                    Button("Dismiss", action: dismiss)
+private struct ModalLink_Preview: PreviewProvider {
+    static var previews: some View {
+        ModalPresenter {
+            List {
+                ModalLink(destination: Text("Destination 1")) {
+                    Text("Open 1")
                 }
-            }) {
-                Text("Open 3")
-            }
-            .modalViewPresentationStyle(.fullScreenCover)
-            
-            ModalLink(destination: Text("Destination 4")) {
-                print("Modal 4 presented")
-            } label: {
-                Text("Open 4")
+                ModalLink(destination: Text("Destination 2")) {
+                    Text("Open 2")
+                }
+                
+                ModalLink(destination: { dismiss in
+                    VStack {
+                        Text("Full screen cover")
+                        Button("Dismiss", action: dismiss)
+                    }
+                }) {
+                    Text("Open 3")
+                }
+                .modalViewPresentationStyle(.fullScreenCover)
+                
+                ModalLink(destination: Text("Destination 4")) {
+                    print("Modal 4 presented")
+                } label: {
+                    Text("Open 4")
+                }
             }
         }
     }
