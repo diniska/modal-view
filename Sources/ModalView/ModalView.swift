@@ -104,22 +104,30 @@ public struct ModalLink<Label, Destination> : View where Label : View, Destinati
     
     private var destinationProvider: DestinationProvider
     private var label: Label
-    private var action: (() -> ())?
+    private var onModalViewPresent: (() -> ())?
     
     @Environment(\.modalViewPresentationStyle)
     private var presentationStyle
     
     /// Default initializer
-    public init(destination: Destination, action: (() -> ())? = nil, @ViewBuilder label: () -> Label) {
+    public init(
+        destination: Destination,
+        onModalViewPresent: (() -> ())? = nil,
+        @ViewBuilder label: () -> Label
+    ) {
         self.destinationProvider = .view(destination)
-        self.action = action
+        self.onModalViewPresent = onModalViewPresent
         self.label = label()
     }
     
     /// Use this initializer when `dismiss` method is needed in the modal view
-    public init(@ViewBuilder destination: @escaping DestinationBuilder, action: (() -> ())? = nil, @ViewBuilder label: () -> Label) {
+    public init(
+        @ViewBuilder destination: @escaping DestinationBuilder,
+        onModalViewPresent: (() -> ())? = nil,
+        @ViewBuilder label: () -> Label
+    ) {
         self.destinationProvider = .builder(destination)
-        self.action = action
+        self.onModalViewPresent = onModalViewPresent
         self.label = label()
     }
     
@@ -128,11 +136,11 @@ public struct ModalLink<Label, Destination> : View where Label : View, Destinati
     }
     
     private func presentModalView() {
-        action?()
         modalView.content = Pipe.Content(
             style: presentationStyle,
             view: AnyView(destinationProvider.destination(dismiss: dismissModalView))
         )
+        onModalViewPresent?()
     }
     
     private func dismissModalView() {
@@ -164,7 +172,7 @@ public struct ModalLink<Label, Destination> : View where Label : View, Destinati
             .modalViewPresentationStyle(.fullScreenCover)
             
             ModalLink(destination: Text("Destination 4")) {
-                print("Did tap 'Open 4'")
+                print("Modal 4 presented")
             } label: {
                 Text("Open 4")
             }
