@@ -104,19 +104,22 @@ public struct ModalLink<Label, Destination> : View where Label : View, Destinati
     
     private var destinationProvider: DestinationProvider
     private var label: Label
+    private var action: (() -> ())?
     
     @Environment(\.modalViewPresentationStyle)
     private var presentationStyle
     
     /// Default initializer
-    public init(destination: Destination, @ViewBuilder label: () -> Label) {
+    public init(destination: Destination, action: (() -> ())? = nil, @ViewBuilder label: () -> Label) {
         self.destinationProvider = .view(destination)
+        self.action = action
         self.label = label()
     }
     
     /// Use this initializer when `dismiss` method is needed in the modal view
-    public init(@ViewBuilder destination: @escaping DestinationBuilder, @ViewBuilder label: () -> Label) {
+    public init(@ViewBuilder destination: @escaping DestinationBuilder, action: (() -> ())? = nil, @ViewBuilder label: () -> Label) {
         self.destinationProvider = .builder(destination)
+        self.action = action
         self.label = label()
     }
     
@@ -125,6 +128,7 @@ public struct ModalLink<Label, Destination> : View where Label : View, Destinati
     }
     
     private func presentModalView() {
+        action?()
         modalView.content = Pipe.Content(
             style: presentationStyle,
             view: AnyView(destinationProvider.destination(dismiss: dismissModalView))
@@ -139,26 +143,30 @@ public struct ModalLink<Label, Destination> : View where Label : View, Destinati
 #if DEBUG
 
 @available(iOS 13, macOS 10.15, tvOS 13, watchOS 6, *)
-private struct ModalLink_Preview: PreviewProvider {
-    static var previews: some View {
-        ModalPresenter {
-            List {
-                ModalLink(destination: Text("Destination 1")) {
-                    Text("Open 1")
+#Preview {
+    ModalPresenter {
+        List {
+            ModalLink(destination: Text("Destination 1")) {
+                Text("Open 1")
+            }
+            ModalLink(destination: Text("Destination 2")) {
+                Text("Open 2")
+            }
+            
+            ModalLink(destination: { dismiss in
+                VStack {
+                    Text("Full screen cover")
+                    Button("Dismiss", action: dismiss)
                 }
-                ModalLink(destination: Text("Destination 2")) {
-                    Text("Open 2")
-                }
-                
-                ModalLink(destination: { dismiss in
-                    VStack {
-                        Text("Full screen cover")
-                        Button("Dismiss", action: dismiss)
-                    }
-                }) {
-                    Text("Open 3")
-                }
-                .modalViewPresentationStyle(.fullScreenCover)
+            }) {
+                Text("Open 3")
+            }
+            .modalViewPresentationStyle(.fullScreenCover)
+            
+            ModalLink(destination: Text("Destination 4")) {
+                print("Did tap 'Open 4'")
+            } label: {
+                Text("Open 4")
             }
         }
     }
