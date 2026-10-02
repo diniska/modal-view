@@ -104,19 +104,30 @@ public struct ModalLink<Label, Destination> : View where Label : View, Destinati
     
     private var destinationProvider: DestinationProvider
     private var label: Label
+    private var onModalViewPresent: (() -> ())?
     
     @Environment(\.modalViewPresentationStyle)
     private var presentationStyle
     
     /// Default initializer
-    public init(destination: Destination, @ViewBuilder label: () -> Label) {
+    public init(
+        destination: Destination,
+        onModalViewPresent: (() -> ())? = nil,
+        @ViewBuilder label: () -> Label
+    ) {
         self.destinationProvider = .view(destination)
+        self.onModalViewPresent = onModalViewPresent
         self.label = label()
     }
     
     /// Use this initializer when `dismiss` method is needed in the modal view
-    public init(@ViewBuilder destination: @escaping DestinationBuilder, @ViewBuilder label: () -> Label) {
+    public init(
+        @ViewBuilder destination: @escaping DestinationBuilder,
+        onModalViewPresent: (() -> ())? = nil,
+        @ViewBuilder label: () -> Label
+    ) {
         self.destinationProvider = .builder(destination)
+        self.onModalViewPresent = onModalViewPresent
         self.label = label()
     }
     
@@ -129,6 +140,7 @@ public struct ModalLink<Label, Destination> : View where Label : View, Destinati
             style: presentationStyle,
             view: AnyView(destinationProvider.destination(dismiss: dismissModalView))
         )
+        onModalViewPresent?()
     }
     
     private func dismissModalView() {
@@ -159,6 +171,15 @@ private struct ModalLink_Preview: PreviewProvider {
                     Text("Open 3")
                 }
                 .modalViewPresentationStyle(.fullScreenCover)
+                
+                ModalLink(
+                    destination: Text("Destination 4"),
+                    onModalViewPresent: {
+                        print("Modal 4 presented")
+                    }
+                ) {
+                    Text("Open 4")
+                }
             }
         }
     }
